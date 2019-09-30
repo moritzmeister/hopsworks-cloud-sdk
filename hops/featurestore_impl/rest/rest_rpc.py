@@ -8,6 +8,24 @@ import sys
 from hops import constants, util
 from hops.exceptions import RestAPIError
 
+def _get_api_path():
+     return constants.DELIMITERS.SLASH_DELIMITER + constants.REST_CONFIG.HOPSWORKS_REST_RESOURCE \
+        + constants.DELIMITERS.SLASH_DELIMITER + constants.REST_CONFIG.HOPSWORKS_PROJECT_RESOURCE \
+        + constants.DELIMITERS.SLASH_DELIMITER
+
+def _get_api_project_path():
+    return _get_api_path() + util.project_id()
+
+def _get_api_featurestore_path():
+    return _get_api_project_path() + constants.DELIMITERS.SLASH_DELIMITER \
+        + constants.REST_CONFIG.HOPSWORKS_FEATURESTORES_RESOURCE
+
+def _get_api_featurestore_path_name(featurestore):
+    return _get_api_featurestore_path() + constants.DELIMITERS.SLASH_DELIMITER + featurestore
+
+def _get_api_featurestore_path_id(featurestore_id):
+    return _get_api_featurestore_path() + constants.DELIMITERS.SLASH_DELIMITER + str(featurestore_id)
+
 
 def _get_featurestores():
     """
